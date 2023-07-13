@@ -133,7 +133,26 @@ router.get('/consult', async (req, res) => {
 
 })
 
+//Editar regist
+router.put('/user', async (req, res) => {
+   
+   //Receber os dados enviados no body da req
+   var dados = req.body;
+   //console.log(dados);
 
+   //Editando dados do registro
+   await db.Users.update(dados, { where: {id: dados.id}})
+   .then(() => {
+      return res.json({
+         message: "Usuário editado com sucesso!"
+      })
+   })
+   .catch(() =>{
+      res.status(404).json({
+         message: "Erro ao editar registro"
+      })
+   })
+})
 
 
 
