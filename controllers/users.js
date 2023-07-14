@@ -154,6 +154,27 @@ router.put('/user', async (req, res) => {
    })
 })
 
+//Apagar registro
+router.delete('/consult/:id', async (req, res) => {
+   const { id } = req.params;
+   //console.log(id)
+
+   await db.Users.destroy({
+      
+      //Acrescentar onde o WHERE na instrução SQL  indicando qual registro excluir
+      where:{id}
+   })
+   .then(() => {
+      return res.json({
+         message: "Usuário apagado com sucesso!"
+      })
+   })
+   .catch((err) => {
+      return res.status(400).json({
+         message: "ERRO! Usuário não apagado!"
+      })
+   })
+})
 
 
 
